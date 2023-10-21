@@ -67,8 +67,6 @@ public class PaquimetroService {
 
         paquimetro.finalizar();
 
-        paquimetro.calcularTempoEValor();
-
         paquimetroRepository.save(paquimetro);
 
         return new PaquimetroResponse().toResponse(paquimetro);

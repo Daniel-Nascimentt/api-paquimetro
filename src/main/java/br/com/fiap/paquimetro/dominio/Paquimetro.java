@@ -58,6 +58,8 @@ public class Paquimetro {
     public void finalizar() {
         this.status = StatusEstacionado.FINALIZADO;
         this.fim = LocalDateTime.now();
+
+        this.calcularTempoEValor();
     }
 
 
