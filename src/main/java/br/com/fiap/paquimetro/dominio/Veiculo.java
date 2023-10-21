@@ -1,5 +1,6 @@
 package br.com.fiap.paquimetro.dominio;
 
+import br.com.fiap.paquimetro.dto.request.VeiculoRequestUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,16 @@ public class Veiculo {
     @DBRef
     private Condutor condutor;
 
+    public Veiculo(String marca, String modelo, String placa, Condutor condutor) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.placa = placa;
+        this.condutor = condutor;
+    }
+
+    public void update(VeiculoRequestUpdate request) {
+        this.marca = (request.getMarca() != null && !request.getMarca().isEmpty()) ? request.getMarca() : this.marca;
+        this.modelo = (request.getModelo() != null && !request.getModelo().isEmpty()) ? request.getModelo() : this.modelo;
+        this.placa = (request.getPlaca() != null && !request.getPlaca().isEmpty()) ? request.getPlaca() : this.placa;
+    }
 }

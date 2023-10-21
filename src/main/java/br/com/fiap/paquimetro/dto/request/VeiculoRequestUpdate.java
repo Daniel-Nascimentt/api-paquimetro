@@ -13,21 +13,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VeiculoRequest {
+public class VeiculoRequestUpdate {
 
-    @NotBlank(message = "A marca deve ser preenchida!")
     private String marca;
 
-    @NotBlank(message = "O Modelo deve ser preenchido!")
     private String modelo;
 
-    @NotBlank(message = "A placa deve ser informada!")
     private String placa;
 
-    @NotBlank(message = "O CondutorId precisa ser informado!")
     private String condutorId;
 
-    public Veiculo toDoc(Condutor condutor) {
-        return new Veiculo(this.marca, this.modelo, this.placa, condutor);
-    }
 }
