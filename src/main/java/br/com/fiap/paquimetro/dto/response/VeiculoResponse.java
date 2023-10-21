@@ -2,6 +2,7 @@ package br.com.fiap.paquimetro.dto.response;
 
 import br.com.fiap.paquimetro.dominio.Veiculo;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema
 public class VeiculoResponse {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

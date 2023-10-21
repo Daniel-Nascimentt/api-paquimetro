@@ -1,9 +1,14 @@
 package br.com.fiap.paquimetro.controller;
 
+import br.com.fiap.paquimetro.dto.request.PaquimetroRequest;
+import br.com.fiap.paquimetro.dto.response.PaquimetroResponse;
+import br.com.fiap.paquimetro.exception.DocNotFoundException;
 import br.com.fiap.paquimetro.service.PaquimetroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/paquimetro")
@@ -11,5 +16,17 @@ public class PaquimetroController {
 
     @Autowired
     private PaquimetroService paquimetroService;
+
+
+    @PostMapping(value = "/iniciar")
+    public ResponseEntity<?> iniciarPaquimentro(@RequestBody @Valid PaquimetroRequest request) throws DocNotFoundException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(paquimetroService.iniciarPaquimetro(request));
+    }
+
+
+    @PostMapping(value = "/finalizar/{paquimetroId}")
+    public ResponseEntity<?> finalizarPaquimentro(@PathVariable String paquimetroId,  @RequestBody @Valid PaquimetroRequest request) throws DocNotFoundException {
+        return ResponseEntity.ok(paquimetroService.finalizarEstacionamento(paquimetroId, request));
+    }
 
 }

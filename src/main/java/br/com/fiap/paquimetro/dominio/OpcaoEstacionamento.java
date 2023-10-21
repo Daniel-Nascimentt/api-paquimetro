@@ -7,12 +7,14 @@ import java.util.List;
 
 public enum OpcaoEstacionamento {
 
-    FIXO(new BigDecimal(20), Arrays.asList(FormaPagamento.PIX, FormaPagamento.CREDITO, FormaPagamento.DEBITO)),
+    FIXO(new BigDecimal(35), Arrays.asList(FormaPagamento.PIX, FormaPagamento.CREDITO, FormaPagamento.DEBITO)),
     P_HORA(new BigDecimal(10), Arrays.asList(FormaPagamento.CREDITO, FormaPagamento.DEBITO));
 
     private BigDecimal preco;
 
     private List<FormaPagamento> formasPagamentoPermitido;
+
+    OpcaoEstacionamento(){}
 
     OpcaoEstacionamento(BigDecimal preco, List<FormaPagamento> formaPagamentoPermitido){
         this.preco = preco;
