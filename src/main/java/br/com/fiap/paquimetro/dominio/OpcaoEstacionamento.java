@@ -12,19 +12,19 @@ public enum OpcaoEstacionamento {
 
     private BigDecimal preco;
 
-    private List<FormaPagamento> formaPagamentoPermitido;
+    private List<FormaPagamento> formasPagamentoPermitido;
 
     OpcaoEstacionamento(BigDecimal preco, List<FormaPagamento> formaPagamentoPermitido){
         this.preco = preco;
-        this.formaPagamentoPermitido = formaPagamentoPermitido;
+        this.formasPagamentoPermitido = formaPagamentoPermitido;
     }
 
     public BigDecimal getPreco() {
         return preco;
     }
 
-    public List<FormaPagamento> getFormaPagamentoPermitido() {
-        return formaPagamentoPermitido;
+    public List<FormaPagamento> getFormasPagamentoPermitido() {
+        return formasPagamentoPermitido;
     }
 
 }
