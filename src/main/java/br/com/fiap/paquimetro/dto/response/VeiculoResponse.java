@@ -7,6 +7,5 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class VeiculoResponse {
 }
