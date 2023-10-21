@@ -21,7 +21,7 @@ public class Paquimetro {
 
     private String id;
 
-    private LocalDateTime inicio;
+    private LocalDateTime inicio = LocalDateTime.now();
 
     private LocalDateTime fim;
 
@@ -39,17 +39,17 @@ public class Paquimetro {
 
     private String tempoEstacionado;
 
+    private long periodoHoras;
 
-    public Paquimetro(LocalDateTime inicio, OpcaoEstacionamento opcaoEstacionamento, Veiculo veiculo, Condutor condutor) {
-        this.inicio = inicio;
+
+    public Paquimetro(OpcaoEstacionamento opcaoEstacionamento, Veiculo veiculo, Condutor condutor) {
         this.opcaoEstacionamento = opcaoEstacionamento;
         this.veiculo = veiculo;
         this.condutor = condutor;
     }
 
-    public Paquimetro(LocalDateTime inicio, LocalDateTime fim, OpcaoEstacionamento opcaoEstacionamento, Veiculo veiculo, Condutor condutor) {
-        this.inicio = inicio;
-        this.fim = fim;
+    public Paquimetro(long periodoHoras, OpcaoEstacionamento opcaoEstacionamento, Veiculo veiculo, Condutor condutor) {
+        this.periodoHoras = periodoHoras;
         this.opcaoEstacionamento = opcaoEstacionamento;
         this.veiculo = veiculo;
         this.condutor = condutor;
@@ -68,10 +68,10 @@ public class Paquimetro {
         long hours = duration.toHours();
         long minutes = duration.toMinutes() % 60;
 
-        if(this.opcaoEstacionamento.equals(OpcaoEstacionamento.P_HORA)){
-            processaValorPHora(hours);
-        } else {
+        if(this.opcaoEstacionamento.equals(OpcaoEstacionamento.FIXO)){
             this.valorAPagar = this.opcaoEstacionamento.getPreco();
+        } else {
+            processaValorPHora(hours);
         }
 
         this.tempoEstacionado = "Tempo estacionado: ".concat(String.valueOf(hours)).concat("HH:").concat(String.valueOf(minutes).concat("mm"));

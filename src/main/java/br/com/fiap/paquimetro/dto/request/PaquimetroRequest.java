@@ -16,9 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PaquimetroRequest {
 
-    private LocalDateTime inicio;
-
-    private LocalDateTime fim;
+    private long periodoHoras;
 
     @NotBlank(message = "Por favor, informe a placa do seu veiculo!")
     private String placa;

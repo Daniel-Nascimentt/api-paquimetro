@@ -37,10 +37,10 @@ public class PaquimetroService {
     private String iniciarEstacionamentoHora(Veiculo veiculo, PaquimetroRequest request) {
         Condutor condutor = veiculo.getCondutor();
 
-        Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(LocalDateTime.now(), OpcaoEstacionamento.P_HORA, veiculo, condutor));
+        Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(OpcaoEstacionamento.P_HORA, veiculo, condutor));
 
         // alguma coisa vai processar isso aqui
-        new AlertaEstacionamento(LocalDateTime.now(), condutor, paquimetroSaved.getStatus());
+        new AlertaEstacionamento(paquimetroSaved.getInicio(), condutor, paquimetroSaved.getStatus());
 
         return paquimetroSaved.getId();
 
@@ -50,10 +50,10 @@ public class PaquimetroService {
     private String iniciarEstacionamentoFixo(Veiculo veiculo, PaquimetroRequest request) {
         Condutor condutor = veiculo.getCondutor();
 
-        Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(request.getInicio(), request.getFim(), OpcaoEstacionamento.FIXO, veiculo, condutor));
+        Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(request.getPeriodoHoras(), OpcaoEstacionamento.FIXO, veiculo, condutor));
 
         // alguma coisa vai processar isso aqui
-        new AlertaEstacionamento(request.getInicio(), condutor, paquimetroSaved.getStatus());
+        new AlertaEstacionamento(paquimetroSaved.getInicio(), condutor, paquimetroSaved.getStatus());
 
         return paquimetroSaved.getId();
     }
