@@ -25,4 +25,6 @@ public class Condutor {
 
     private FormaPagamento prefPagamento;
 
+    private String endereco;
+
 }
