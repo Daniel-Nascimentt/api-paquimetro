@@ -1,12 +1,17 @@
 package br.com.fiap.paquimetro.service;
 
 import br.com.fiap.paquimetro.dominio.*;
+import br.com.fiap.paquimetro.dto.request.PaquimetroPagamentoRequest;
 import br.com.fiap.paquimetro.dto.request.PaquimetroRequest;
 import br.com.fiap.paquimetro.dto.response.PaquimetroResponse;
 import br.com.fiap.paquimetro.exception.DocNotFoundException;
+import br.com.fiap.paquimetro.exception.PagamentoInvalidoException;
+import br.com.fiap.paquimetro.queue.RabbitMq;
 import br.com.fiap.paquimetro.repository.PaquimetroRepository;
 import br.com.fiap.paquimetro.repository.VeiculoRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +25,9 @@ public class PaquimetroService {
 
     @Autowired
     private VeiculoRepository veiculoRepository;
+
+    @Autowired
+    private RabbitMq rabbitMq;
 
     @Transactional
     public String iniciarPaquimetro(PaquimetroRequest request) throws DocNotFoundException {
@@ -73,4 +81,12 @@ public class PaquimetroService {
 
     }
 
+    @Async
+    public void pagar(String paquimetroId, PaquimetroPagamentoRequest request) throws DocNotFoundException, JsonProcessingException, PagamentoInvalidoException {
+        Paquimetro paquimetro = paquimetroRepository.findByIdAndPago(paquimetroId, false).orElseThrow(() -> new DocNotFoundException("PaquimetroId não encontrado!!"));
+        paquimetro.pagar(request.getFormaPagamento());
+        paquimetroRepository.save(paquimetro);
+
+        rabbitMq.sendEmitirRecibo(paquimetro);
+    }
 }

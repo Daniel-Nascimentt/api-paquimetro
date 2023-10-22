@@ -1,5 +1,7 @@
 package br.com.fiap.paquimetro.dominio;
 
+import br.com.fiap.paquimetro.exception.PagamentoInvalidoException;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,8 @@ public class Paquimetro {
     private String tempoEstacionado;
 
     private long periodoHoras;
+
+    private boolean pago = false;
 
 
     public Paquimetro(OpcaoEstacionamento opcaoEstacionamento, Veiculo veiculo, Condutor condutor) {
@@ -89,5 +93,12 @@ public class Paquimetro {
         }
 
         this.valorAPagar = this.opcaoEstacionamento.getPreco();
+    }
+
+    public void pagar(FormaPagamento formaPagamento) throws PagamentoInvalidoException {
+        if(!this.opcaoEstacionamento.getFormasPagamentoPermitido().contains(formaPagamento)){
+            throw new PagamentoInvalidoException("Essa forma de pagamento não é valida para essa opção de estacionamento: "+ this.opcaoEstacionamento.toString() +"!!");
+        }
+        this.pago = true;
     }
 }

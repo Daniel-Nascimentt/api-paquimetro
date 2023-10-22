@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface PaquimetroRepository extends MongoRepository<Paquimetro, String> {
     Optional<Paquimetro> findByIdAndVeiculoAndStatus(String paquimetroId, Veiculo veiculo, StatusEstacionado ativo);
+
+    Optional<Paquimetro> findByIdAndPago(String paquimetroId, boolean b);
 }

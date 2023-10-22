@@ -2,6 +2,7 @@ package br.com.fiap.paquimetro.controller.advice;
 
 import br.com.fiap.paquimetro.controller.advice.dto.ErrorResponseDetails;
 import br.com.fiap.paquimetro.exception.DocNotFoundException;
+import br.com.fiap.paquimetro.exception.PagamentoInvalidoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,6 +39,17 @@ public class ControllerAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDetails(
                 "Documento não encontrado!!",
                 HttpStatus.NOT_FOUND.value(),
+                Arrays.asList(ex.getMessage()),
+                new Date().getTime()));
+    }
+
+    @ExceptionHandler(PagamentoInvalidoException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> handlerPagamentoInvalidoException(PagamentoInvalidoException ex){
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDetails(
+                "Forma de pagamento inválida!",
+                HttpStatus.BAD_REQUEST.value(),
                 Arrays.asList(ex.getMessage()),
                 new Date().getTime()));
     }
