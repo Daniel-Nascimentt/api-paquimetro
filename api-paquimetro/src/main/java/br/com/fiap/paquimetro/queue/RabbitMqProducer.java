@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableRabbit
-public class RabbitMq {
+public class RabbitMqProducer {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;

@@ -6,7 +6,7 @@ import br.com.fiap.paquimetro.dto.request.PaquimetroRequest;
 import br.com.fiap.paquimetro.dto.response.PaquimetroResponse;
 import br.com.fiap.paquimetro.exception.DocNotFoundException;
 import br.com.fiap.paquimetro.exception.PagamentoInvalidoException;
-import br.com.fiap.paquimetro.queue.RabbitMq;
+import br.com.fiap.paquimetro.queue.RabbitMqProducer;
 import br.com.fiap.paquimetro.repository.PaquimetroRepository;
 import br.com.fiap.paquimetro.repository.VeiculoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @Service
 public class PaquimetroService {
@@ -27,7 +25,7 @@ public class PaquimetroService {
     private VeiculoRepository veiculoRepository;
 
     @Autowired
-    private RabbitMq rabbitMq;
+    private RabbitMqProducer rabbitMq;
 
     @Transactional
     public String iniciarPaquimetro(PaquimetroRequest request) throws DocNotFoundException {
