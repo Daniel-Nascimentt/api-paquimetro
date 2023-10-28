@@ -47,11 +47,11 @@ Nesse documento não possui o swagger, endpoints e payloads de request e respons
 
 Para executar local você precisara ter o docker para que consiga executar o RabbitMq e criar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
 
-Caso faça o teste dos micro-services local, recomendo que crie uma conta gmail de teste e siga a documentação do Google para gerar uma chave para que seja utilizado no mail sender.
+Caso faça o teste dos micro-services local, recomendo que crie uma conta gmail de teste e siga a documentação do Google para gerar uma chave para que seja utilizada no mail sender.
 
 Neste caso, criei uma conta chamada: *ms.email.fiap@gmail.com*  e segui a documentação do link: https://support.google.com/accounts/answer/185833
 
-Ao gerar a senha de 16 dígitos, incluí ela na propriedade: 
+Ao gerar a senha de 16 dígitos, basta inclui-la na propriedade: 
 > spring.mail.password=${SPRING.MAIL.PASS}
 
 Por motivos de segurança, optei por deixar essa key como uma váriavel de ambiente.
@@ -62,7 +62,7 @@ As filas criadas no RabbitMq são:
 * criar-alerta
     * Vai criar o alerta na collection do mongo de forma assincrona, sem prender a requisição para isso.
 * email-recibo-enviado
-    * Contém uma lógica dentro da collection de recibo, com um boolean que informa se o email foi enviado ou não.
+    * Contém um atributo dentro da collection de recibo, com um boolean que informa se o email foi enviado ou não.
 * emissao-recibo
     * Contém a lógica para gerar o recibo e fazer o envio por e-mail para o usuário.
 
@@ -72,7 +72,7 @@ As filas criadas no RabbitMq são:
 *Arquitetura de micro-service:*
 Como é um sistema que precisa ser escalável, separar algumas responsabilidades, utilizar menssageria para processamento assincrono nos permite ser mais performatico em certos casos. Como esse sistema dificilmente haverá concorrencia, justamente porque usuários diferentes não acessarão os mesmos recursos, foi criado 4 APIs spring boot para compor a nova arquitetura da empresa de paquimetros. No caso de uma implementação em cloud, poderiamos criar load balancers e distribuir as cargas entre nossos micro serviços, mas como não é o foco de implantação em nuvem, seguimos.
 
-*Uso do Spring mail sender:* Foi uma solução para enviar e-mails personalizados para cada usuário de forma simples. Poderia ser implementado usando o SES da AWS, porém pela praticidade o mail sender, optei pelo uso do mesmo para fazer o envio de alertas e optei pelo envio de recibo também por e-mail.  
+*Uso do Spring mail sender:* Foi uma solução para enviar e-mails personalizados para cada usuário de forma simples. Poderia ser implementado usando o SES da AWS, porém pela praticidade do mail sender, optei pelo uso do mesmo para fazer o envio de alertas e optei pelo envio de recibo também por e-mail.  
 
 *Tratamentos de erros:* Os erros são tratados via exceptions handler e algumas propriedades adiconadas a todos micro serviços que não deixa a aplicação cuspir o trace de erro.
 
@@ -144,7 +144,7 @@ server.error.include-stacktrace= never
 #
 # Sobre API-paquimetro 
 
-A API-paquimetro é responsavel por iniciar e finalizar/pagar o estacionamento, enviar mensagens para demais micro serviços (via RabbitMq), bem como o *ms-alerta* para programar o alerta com base no inicio do estacionamento, o *ms-recibo* para gerar o recibo e enviar ao cliente. Também executar alguns relatórios úteis. Sempre que um paquimetro é iniciado, ele solicita a placa do veículo, a partir da placa do veículo é possivel identificar o condutor, facilitando a usabilidade do sistema para o condutor.
+A API-paquimetro é responsavel por iniciar e finalizar/pagar o estacionamento, enviar mensagens para demais micro serviços (via RabbitMq), bem como o *ms-alerta* para programar o alerta com base no inicio do estacionamento e o *ms-recibo* para gerar o recibo e enviar ao cliente. Também executar alguns relatórios úteis. Sempre que um paquimetro é iniciado, ele solicita a placa do veículo, a partir da placa do veículo é possivel identificar o condutor, facilitando a usabilidade do sistema para o condutor.
 
 #
 
@@ -161,7 +161,8 @@ Como o próprio nome ja diz, sua unica responsabilidade é para gerenciar alerta
 
 ## EXEMPLO do e-mail de alerta:
 #### OBS: Repare no e-mail remetente
-![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/43c10c63-04c1-403c-b22c-098e0210fe1e)
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/7c15cb6c-1194-4caf-a86e-e14dfdcd95f1)
+
 
 #
 
@@ -201,7 +202,7 @@ Como o próprio nome ja diz, sua unica responsabilidade é para o gerenciamento 
 # Postman Collection 
 #### OBS: Nos endpoints de iniciar, finalizar e pagar, atente-se que na URL é solicitado o id do paquimetro. Ao iniciar o paquimetro, ele é retornado no endpoint.
 
-Basta clicar no link: *api-paquimetro.postman_collection.json* que o download vai começar, feito isso basta importar a collection no postman.
+Basta clicar no link abaixo: *api-paquimetro.postman_collection.json* que o download da collection vai começar, feito isso basta importar a collection no postman.
 
 
 [api-paquimetro.postman_collection.json](https://github.com/Daniel-Nascimentt/api-paquimetro/files/13196821/api-paquimetro.postman_collection.json)
