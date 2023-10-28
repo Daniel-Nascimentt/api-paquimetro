@@ -78,12 +78,17 @@ public class PaquimetroService {
 
     }
 
-    @Async
+
     public void pagar(String paquimetroId, PaquimetroPagamentoRequest request) throws DocNotFoundException, JsonProcessingException, PagamentoInvalidoException {
         Paquimetro paquimetro = paquimetroRepository.findByIdAndPago(paquimetroId, false).orElseThrow(() -> new DocNotFoundException("PaquimetroId não encontrado!!"));
         paquimetro.pagar(request.getFormaPagamento());
         paquimetroRepository.save(paquimetro);
 
+        emitirRecibo(paquimetro);
+    }
+
+    @Async
+    public void emitirRecibo(Paquimetro paquimetro) throws JsonProcessingException {
         rabbitMq.sendEmitirRecibo(paquimetro);
     }
 }
