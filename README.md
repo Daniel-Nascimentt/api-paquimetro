@@ -43,9 +43,9 @@
 
 # Start 👨🏻‍🔧
 
-Nesse documento não possui o swagger, endpoints e payloads de request e response. Mais abaixo você encontra-ra um print com os principais endpoints mais para ilustração, caso queria ver no detalhe, basta fazer o download do projeto e executar seus respectivos swaggers.
+Nesse documento não possui o swagger, endpoints e payloads de request e response. Mais abaixo você encontrara um print com os principais endpoints mais para ilustração, caso queria ver no detalhe, basta fazer o download do projeto e executar seus respectivos swaggers.
 
-Para executar local você precisa-ra ter o docker para que consiga executar o RabbitMq e crirar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
+Para executar local você precisara ter o docker para que consiga executar o RabbitMq e crirar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
 
 Caso faça o teste dos micro-services local, recomendo que crie uma conta gmail de teste e siga a documentação do Google para gerar uma chave para que seja utilizado no mail sender.
 
@@ -58,7 +58,7 @@ Por motivos de segurança, optei por deixar essa key como uma váriavel de ambie
 
 As filas criadas no RabbitMq são:
 * cancelar-alerta 
-    * Cada vez que o usuário iniciar o estacionamento, é programado um horario para notifica-lo quando estiver prestes a completar mais uma hora de seu período, e quando o cliente faz o pagamento, é necessário dar baixa no alerta que está ativo na collection do mongo. Para isso o micro service de alerta possui um job que varre a base a cada 2 minutos verificando se existe algum alerta dentro de um range, se houver, ele notifica-ra o usuário respectivo.
+    * Cada vez que o usuário iniciar o estacionamento, é programado um horario para notifica-lo quando estiver prestes a completar mais uma hora de seu período, e quando o cliente faz o pagamento, é necessário dar baixa no alerta que está ativo na collection do mongo. Para isso o micro service de alerta possui um job que varre a base a cada 2 minutos verificando se existe algum alerta dentro de um range, se houver, ele notificara o usuário respectivo.
 * criar-alerta
     * Vai criar o alerta na collection do mongo de forma assincrona, sem prender a requisição para isso.
 * email-recibo-enviado
