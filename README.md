@@ -70,7 +70,7 @@ As filas criadas no RabbitMq são:
 # Decisoes ✍🏻 
 
 *Arquitetura de micro-service:*
-Como é um sistema que precisa ser escalável, separar algumas responsabilidades, utilizar menssageria para processamento assincrono nos permite ser mais performatico em certos casos. Como esse sistema dificilmente haverá concorrencia, justamente porque usuários diferentes não acessarão os mesmos recursos, foi criado 4 APIs spring boot para compor a nova arquitetura da empresa de paquimetros.
+Como é um sistema que precisa ser escalável, separar algumas responsabilidades, utilizar menssageria para processamento assincrono nos permite ser mais performatico em certos casos. Como esse sistema dificilmente haverá concorrencia, justamente porque usuários diferentes não acessarão os mesmos recursos, foi criado 4 APIs spring boot para compor a nova arquitetura da empresa de paquimetros. No caso de uma implementação em cloud, poderiamos criar load balancers e distribuir as cargas entre nossos micro serviços, mas como não é o foco de implantação em nuvem, seguimos.
 
 *Uso do Spring mail sender:* Foi uma solução para enviar e-mails personalizados para cada usuário de forma simples. Poderia ser implementado usando o SES da AWS, porém pela praticidade o mail sender, optei pelo uso do mesmo para fazer o envio de alertas e optei pelo envio de recibo também por e-mail.  
 
