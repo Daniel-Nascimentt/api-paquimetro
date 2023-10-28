@@ -45,7 +45,7 @@
 
 Nesse documento não possui o swagger, endpoints e payloads de request e response. Mais abaixo você encontrara um print com os principais endpoints, para ilustração. Caso queria ver no detalhe, basta fazer o download do projeto e executar seus respectivos swaggers.
 
-Para executar local você precisara ter o docker para que consiga executar o RabbitMq e crirar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
+Para executar local você precisara ter o docker para que consiga executar o RabbitMq e criar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
 
 Caso faça o teste dos micro-services local, recomendo que crie uma conta gmail de teste e siga a documentação do Google para gerar uma chave para que seja utilizado no mail sender.
 
