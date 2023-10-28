@@ -200,6 +200,8 @@ Como o próprio nome ja diz, sua unica responsabilidade é para o gerenciamento 
 
 # Postman Collection 
 #### OBS: Nos endpoints de iniciar, finalizar e pagar, atente-se que na URL é solicitado o id do paquimetro. Ao iniciar o paquimetro, ele é retornado no endpoint.
+
+Basta clicar no link: *api-paquimetro.postman_collection.json* que o download vai começar, feito isso basta importar a collection no postman.
 [api-paquimetro.postman_collection.json](https://github.com/Daniel-Nascimentt/api-paquimetro/files/13196821/api-paquimetro.postman_collection.json)
 {
 	"info": {
