@@ -128,11 +128,17 @@ server.error.include-stacktrace= never
 
 # Exemplo Collection Mongo
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/a96d6cdb-d9b4-4dd2-ab2d-6d33a8f90eed)
+
 > OBS: CPF gerado no site 4Devs
+
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/03314626-90ef-4599-b774-d2ea0aba150d)
+
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/0d26d8cb-5d94-4d1b-b742-827bebed74e8)
+
 > OBS: O tempo de estacionamento está zerado porque é um exemplo
+
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/d7b691a9-1c49-4ffc-8ea2-74a2047ba6d1)
+
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/74dbd7c8-d2e6-4405-bbb6-943747b4b021)
 
 #
