@@ -3,6 +3,8 @@ package br.com.fiap.alerta.service;
 import br.com.fiap.alerta.client.EmailClient;
 import br.com.fiap.alerta.client.request.EmailRequest;
 import br.com.fiap.alerta.dominio.Alerta;
+import br.com.fiap.alerta.dominio.StatusAlerta;
+import br.com.fiap.alerta.dto.response.AlertaResponse;
 import br.com.fiap.alerta.repository.AlertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -51,5 +53,13 @@ public class AlertaService {
                 .concat("\n")
                 .concat("Atenciosamente: Equipe FIAP de paquimetro.");
     }
-    
+
+    public AlertaResponse obterContagemAlertas() {
+
+       long alertasAtivos =  alertaRepository.countByStatusAlerta(StatusAlerta.PENDENTE);
+       long alertasFinalizados = alertaRepository.countByStatusAlerta(StatusAlerta.PAQ_ENCERRADO);
+
+       return new AlertaResponse(alertasAtivos, alertasFinalizados);
+
+    }
 }

@@ -2,8 +2,10 @@ package br.com.fiap.recibo.service;
 
 import br.com.fiap.recibo.client.EmailClient;
 import br.com.fiap.recibo.client.request.EmailRequest;
+import br.com.fiap.recibo.dominio.OpcaoEstacionamento;
 import br.com.fiap.recibo.dominio.Paquimetro;
 import br.com.fiap.recibo.dominio.Recibo;
+import br.com.fiap.recibo.dto.response.ReciboResponse;
 import br.com.fiap.recibo.queue.RabbitMqProducer;
 import br.com.fiap.recibo.repository.ReciboRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +62,13 @@ public class ReciboService {
         return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     }
 
+    public ReciboResponse obterContagemRecibos() {
+
+        long quantidadeRecibos = reciboRepository.count();
+        long quantidadeRecibosPHora = reciboRepository.countByOpcaoEstacionamento(OpcaoEstacionamento.P_HORA);
+        long quantidadeRecibosFixo = reciboRepository.countByOpcaoEstacionamento(OpcaoEstacionamento.FIXO);
+        long quantidadeRecibosNotificados = reciboRepository.countByEnviadoPorEmail(true);
+
+        return new ReciboResponse(quantidadeRecibos, quantidadeRecibosPHora, quantidadeRecibosFixo, quantidadeRecibosNotificados);
+    }
 }

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 public class AlertaScheduled {
 
     // em milesegundos
-    private static final long MINUTOS = 2000;
+    private static final long DOIS_MINUTOS = 20000;
 
     @Autowired
     private AlertaService alertaService;
 
-    @Scheduled(fixedDelay = MINUTOS)
+    @Scheduled(fixedDelay = DOIS_MINUTOS)
     public void enviarAlerta(){
         System.out.println("Verificando se há alertas a serem enviados: ");
         alertaService.alertarCondutor();

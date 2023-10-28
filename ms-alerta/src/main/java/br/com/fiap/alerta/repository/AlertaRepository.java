@@ -22,6 +22,7 @@ public interface AlertaRepository extends MongoRepository<Alerta, String> {
         return findByStatusPaquimetroAndStatusAlertaAndProximaAlertaBetween(StatusEstacionado.ATIVO, StatusAlerta.PENDENTE, LocalDateTime.now(), LocalDateTime.now().plusMinutes(5));
     }
 
+    long countByStatusAlerta(StatusAlerta statusAlerta);
 }
 
 
