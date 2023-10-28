@@ -47,7 +47,7 @@ Nesse documento não possui o swagger, endpoints e payloads de request e respons
 
 Para executar local você precisa-ra ter o docker para que consiga executar o RabbitMq e crirar suas respectivas filas, e o mongodb, no caso utilizei ele local e não pelo docker, mas fica a seu criterio a forma de start do mongo db.
 
-Caso faça o teste dos micro-services local, recomendo que siga a documentação do Google para gerar uma chave para que seja utilizado no mail sender.
+Caso faça o teste dos micro-services local, recomendo que crie uma conta gmail de teste e siga a documentação do Google para gerar uma chave para que seja utilizado no mail sender.
 
 Neste caso, criei uma conta chamada: *ms.email.fiap@gmail.com*  e segui a documentação do link: https://support.google.com/accounts/answer/185833
 
