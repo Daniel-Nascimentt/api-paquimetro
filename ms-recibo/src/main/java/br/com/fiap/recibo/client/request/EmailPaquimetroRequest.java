@@ -15,7 +15,7 @@ import lombok.Setter;
 public class EmailPaquimetroRequest {
 
     @NotBlank
-    private String idPaquimetro;
+    private String idRecibo;
 
     @NotBlank
     private String titulo;
@@ -27,8 +27,8 @@ public class EmailPaquimetroRequest {
     private String texto;
 
 
-    public EmailPaquimetroRequest(String destinatario, String idPaquimetro, String corpoEmail) {
-        this.idPaquimetro = idPaquimetro;
+    public EmailPaquimetroRequest(String destinatario, String idRecibo, String corpoEmail) {
+        this.idRecibo = idRecibo;
         this.titulo = ConstantRecibo.TITULO_RECIBO;
         this.destinatario = destinatario;
         this.texto = corpoEmail;

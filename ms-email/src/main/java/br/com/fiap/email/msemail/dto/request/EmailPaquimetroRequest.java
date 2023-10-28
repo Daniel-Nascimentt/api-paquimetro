@@ -13,7 +13,7 @@ import lombok.Setter;
 public class EmailPaquimetroRequest {
 
     @NotBlank
-    private String idPaquimetro;
+    private String idRecibo;
 
     @NotBlank
     private String titulo;

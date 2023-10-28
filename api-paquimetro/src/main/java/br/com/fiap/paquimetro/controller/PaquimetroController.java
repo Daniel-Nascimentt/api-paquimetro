@@ -22,7 +22,7 @@ public class PaquimetroController {
 
 
     @PostMapping(value = "/iniciar")
-    public ResponseEntity<?> iniciarPaquimentro(@RequestBody @Valid PaquimetroRequest request) throws DocNotFoundException {
+    public ResponseEntity<?> iniciarPaquimentro(@RequestBody @Valid PaquimetroRequest request) throws DocNotFoundException, JsonProcessingException {
         return ResponseEntity.status(HttpStatus.CREATED).body(paquimetroService.iniciarPaquimetro(request));
     }
 

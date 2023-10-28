@@ -1,6 +1,7 @@
 package br.com.fiap.paquimetro.service;
 
 import br.com.fiap.paquimetro.dominio.*;
+import br.com.fiap.paquimetro.dto.request.AlertaRequest;
 import br.com.fiap.paquimetro.dto.request.PaquimetroPagamentoRequest;
 import br.com.fiap.paquimetro.dto.request.PaquimetroRequest;
 import br.com.fiap.paquimetro.dto.response.PaquimetroResponse;
@@ -28,7 +29,7 @@ public class PaquimetroService {
     private RabbitMqProducer rabbitMq;
 
     @Transactional
-    public String iniciarPaquimetro(PaquimetroRequest request) throws DocNotFoundException {
+    public String iniciarPaquimetro(PaquimetroRequest request) throws DocNotFoundException, JsonProcessingException {
 
         Veiculo veiculo = veiculoRepository.findByPlaca(request.getPlaca()).orElseThrow(() -> new DocNotFoundException("Veiculo não encontrado!"));
 
@@ -40,26 +41,24 @@ public class PaquimetroService {
     }
 
     @Transactional
-    private String iniciarEstacionamentoHora(Veiculo veiculo, PaquimetroRequest request) {
+    private String iniciarEstacionamentoHora(Veiculo veiculo, PaquimetroRequest request) throws JsonProcessingException {
         Condutor condutor = veiculo.getCondutor();
 
         Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(OpcaoEstacionamento.P_HORA, veiculo, condutor));
 
-        // alguma coisa vai processar isso aqui
-        new AlertaEstacionamento(paquimetroSaved.getInicio(), condutor, paquimetroSaved.getStatus());
+        rabbitMq.criarAlerta(new AlertaRequest(paquimetroSaved));
 
         return paquimetroSaved.getId();
 
     }
 
     @Transactional
-    private String iniciarEstacionamentoFixo(Veiculo veiculo, PaquimetroRequest request) {
+    private String iniciarEstacionamentoFixo(Veiculo veiculo, PaquimetroRequest request) throws JsonProcessingException {
         Condutor condutor = veiculo.getCondutor();
 
         Paquimetro paquimetroSaved = paquimetroRepository.save(new Paquimetro(request.getPeriodoHoras(), OpcaoEstacionamento.FIXO, veiculo, condutor));
 
-        // alguma coisa vai processar isso aqui
-        new AlertaEstacionamento(paquimetroSaved.getInicio(), condutor, paquimetroSaved.getStatus());
+        rabbitMq.criarAlerta(new AlertaRequest(paquimetroSaved));
 
         return paquimetroSaved.getId();
     }

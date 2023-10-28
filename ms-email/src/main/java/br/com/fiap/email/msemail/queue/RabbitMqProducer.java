@@ -14,10 +14,10 @@ public class RabbitMqProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void confirmarEnvioDeEmail(String idPaquimetro) {
+    public void confirmarEnvioDeEmail(String idRecibo) {
         rabbitTemplate.convertAndSend(
                 queueConfirmacaoDeEnvioEmail().getName(),
-                idPaquimetro
+                idRecibo
         );
     }
 

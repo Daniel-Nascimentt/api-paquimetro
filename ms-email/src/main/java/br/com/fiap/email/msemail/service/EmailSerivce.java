@@ -30,7 +30,7 @@ public class EmailSerivce {
             message.setText(request.getTexto());
             javaMailSender.send(message);
 
-            rabbitMq.confirmarEnvioDeEmail(request.getIdPaquimetro());
+            rabbitMq.confirmarEnvioDeEmail(request.getIdRecibo());
 
         } catch(MailException ex){
 

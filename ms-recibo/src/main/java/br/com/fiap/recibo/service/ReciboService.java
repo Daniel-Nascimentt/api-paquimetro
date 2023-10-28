@@ -39,10 +39,7 @@ public class ReciboService {
 
     public void enviarEmail(Recibo recibo, String idPaquimetro){
         String corpoEmail = prepararEmail(recibo);
-        emailClient.enviarEmail(new EmailPaquimetroRequest(recibo.getCondutor().getEmail(), idPaquimetro, corpoEmail));
-
-        recibo.setEnviadoPorEmail(true);
-        reciboRepository.save(recibo);
+        emailClient.enviarEmail(new EmailPaquimetroRequest(recibo.getCondutor().getEmail(), recibo.getCodigo(), corpoEmail));
 
         rabbitMqProducer.sendCancelarAlerta(idPaquimetro);
     }
