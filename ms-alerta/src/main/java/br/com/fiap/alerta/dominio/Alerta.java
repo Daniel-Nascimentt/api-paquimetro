@@ -27,6 +27,7 @@ public class Alerta {
     private StatusEstacionado statusPaquimetro;
     private String notificarEmail;
     private StatusAlerta statusAlerta = StatusAlerta.PENDENTE;
+    private Long notificacoes = 0L;
 
     public Alerta(LocalDateTime inicio, StatusEstacionado status, String email, String idPaquimetro) {
         this.proximaAlerta = inicio.plusMinutes(MINUTOS_PARA_ALERTA);
@@ -38,6 +39,7 @@ public class Alerta {
     public void notificarNovamente(LocalDateTime ultimoAlerta){
         this.ultimoAlerta = ultimoAlerta;
         this.proximaAlerta = ultimoAlerta.plusMinutes(MINUTOS_PARA_ALERTA);
+        this.notificacoes++;
     }
 
 }

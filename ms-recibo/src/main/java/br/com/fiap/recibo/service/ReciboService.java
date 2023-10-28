@@ -51,7 +51,7 @@ public class ReciboService {
                 .concat("Modalidade de estacionamento: ").concat(recibo.getOpcaoEstacionamento().toString()).concat("\n")
                 .concat("De: ").concat(recibo.getInicio().format(getPatternFormat())).concat(" - Até: ").concat(recibo.getFim().format(getPatternFormat())).concat("\n")
                 .concat("Periodo estacionado: ").concat(recibo.getTempoEstacionado()).concat("\n")
-                .concat("Total pago: ").concat(recibo.getValorTotalPago().setScale(2, RoundingMode.HALF_UP).toString())
+                .concat("Total pago: ").concat(recibo.getValorTotalPago().setScale(2, RoundingMode.HALF_UP).toString()).concat("\n")
                 .concat("\n")
                 .concat("Atenciosamente: Equipe FIAP de paquimetro.");
     }
