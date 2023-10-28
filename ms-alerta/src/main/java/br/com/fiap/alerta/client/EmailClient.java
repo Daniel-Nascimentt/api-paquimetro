@@ -1,7 +1,6 @@
-package br.com.fiap.recibo.client;
+package br.com.fiap.alerta.client;
 
-
-import br.com.fiap.recibo.client.request.EmailRequest;
+import br.com.fiap.alerta.client.request.EmailRequest;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

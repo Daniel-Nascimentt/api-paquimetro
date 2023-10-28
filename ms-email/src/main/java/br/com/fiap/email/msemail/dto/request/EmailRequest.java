@@ -1,6 +1,8 @@
 package br.com.fiap.email.msemail.dto.request;
 
+import br.com.fiap.email.msemail.dominio.ServiceRequestSendEmail;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +12,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmailPaquimetroRequest {
+public class EmailRequest {
 
-    @NotBlank
     private String idRecibo;
 
     @NotBlank
@@ -23,5 +24,8 @@ public class EmailPaquimetroRequest {
 
     @NotBlank
     private String texto;
+
+    @NotNull
+    private String service;
 
 }

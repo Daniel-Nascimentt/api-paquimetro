@@ -1,8 +1,8 @@
 package br.com.fiap.email.msemail.service;
 
-import br.com.fiap.email.msemail.dto.request.EmailPaquimetroRequest;
+import br.com.fiap.email.msemail.dominio.ServiceRequestSendEmail;
+import br.com.fiap.email.msemail.dto.request.EmailRequest;
 import br.com.fiap.email.msemail.queue.RabbitMqProducer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -21,7 +21,7 @@ public class EmailSerivce {
     private RabbitMqProducer rabbitMq;
 
     @Async
-    public void enviarEmail(@Valid EmailPaquimetroRequest request){
+    public void enviarEmail(@Valid EmailRequest request){
 
         try {
             SimpleMailMessage message = new SimpleMailMessage();
@@ -30,7 +30,9 @@ public class EmailSerivce {
             message.setText(request.getTexto());
             javaMailSender.send(message);
 
-            rabbitMq.confirmarEnvioDeEmail(request.getIdRecibo());
+            if(request.getService().equals(ServiceRequestSendEmail.MS_RECIBO.name())){
+                rabbitMq.confirmarEnvioDeEmail(request.getIdRecibo());
+            }
 
         } catch(MailException ex){
 

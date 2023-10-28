@@ -1,7 +1,6 @@
-package br.com.fiap.recibo.client.request;
+package br.com.fiap.alerta.client.request;
 
-import br.com.fiap.recibo.constant.ConstantRecibo;
-import br.com.fiap.recibo.dominio.Recibo;
+import br.com.fiap.alerta.constant.ConstantRecibo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,10 +11,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmailPaquimetroRequest {
+public class EmailRequest {
 
-    @NotBlank
-    private String idRecibo;
+    private static final String MS_NOME = "MS_ALERTA";
 
     @NotBlank
     private String titulo;
@@ -26,11 +24,13 @@ public class EmailPaquimetroRequest {
     @NotBlank
     private String texto;
 
+    private String service = MS_NOME;
 
-    public EmailPaquimetroRequest(String destinatario, String idRecibo, String corpoEmail) {
-        this.idRecibo = idRecibo;
-        this.titulo = ConstantRecibo.TITULO_RECIBO;
+
+    public EmailRequest(String destinatario, String corpoEmail) {
+        this.titulo = ConstantRecibo.TITULO_ALERTA;
         this.destinatario = destinatario;
         this.texto = corpoEmail;
     }
+
 }

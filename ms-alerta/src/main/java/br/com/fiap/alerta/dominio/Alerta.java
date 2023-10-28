@@ -35,7 +35,7 @@ public class Alerta {
         this.idPaquimetro = idPaquimetro;
     }
 
-    public void notificarNovamente(LocalDateTime ultimoAlerta, StatusEstacionado status){
+    public void notificarNovamente(LocalDateTime ultimoAlerta){
         this.ultimoAlerta = ultimoAlerta;
         this.proximaAlerta = ultimoAlerta.plusMinutes(MINUTOS_PARA_ALERTA);
     }

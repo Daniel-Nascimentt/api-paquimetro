@@ -1,7 +1,7 @@
 package br.com.fiap.recibo.service;
 
 import br.com.fiap.recibo.client.EmailClient;
-import br.com.fiap.recibo.client.request.EmailPaquimetroRequest;
+import br.com.fiap.recibo.client.request.EmailRequest;
 import br.com.fiap.recibo.dominio.Paquimetro;
 import br.com.fiap.recibo.dominio.Recibo;
 import br.com.fiap.recibo.queue.RabbitMqProducer;
@@ -39,8 +39,7 @@ public class ReciboService {
 
     public void enviarEmail(Recibo recibo, String idPaquimetro){
         String corpoEmail = prepararEmail(recibo);
-        emailClient.enviarEmail(new EmailPaquimetroRequest(recibo.getCondutor().getEmail(), recibo.getCodigo(), corpoEmail));
-
+        emailClient.enviarEmail(new EmailRequest(recibo.getCondutor().getEmail(), recibo.getCodigo(), corpoEmail));
         rabbitMqProducer.sendCancelarAlerta(idPaquimetro);
     }
 
@@ -52,7 +51,9 @@ public class ReciboService {
                 .concat("Modalidade de estacionamento: ").concat(recibo.getOpcaoEstacionamento().toString()).concat("\n")
                 .concat("De: ").concat(recibo.getInicio().format(getPatternFormat())).concat(" - Até: ").concat(recibo.getFim().format(getPatternFormat())).concat("\n")
                 .concat("Periodo estacionado: ").concat(recibo.getTempoEstacionado()).concat("\n")
-                .concat("Total pago: R$").concat(recibo.getValorTotalPago().setScale(2, RoundingMode.HALF_UP).toString());
+                .concat("Total pago: ").concat(recibo.getValorTotalPago().setScale(2, RoundingMode.HALF_UP).toString())
+                .concat("\n")
+                .concat("Atenciosamente: Equipe FIAP de paquimetro.");
     }
 
     private DateTimeFormatter getPatternFormat() {
