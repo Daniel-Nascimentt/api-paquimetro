@@ -16,7 +16,7 @@ public class EmailController {
     @Autowired
     private EmailSerivce service;
 
-    @PostMapping
+    @PostMapping(value = "/enviar")
     public ResponseEntity<?> enviarEmail(@RequestBody @Valid EmailPaquimetroRequest request){
         service.enviarEmail(request);
         return ResponseEntity.ok().build();

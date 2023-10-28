@@ -35,7 +35,7 @@ public class PaquimetroController {
     @PostMapping(value = "/pagar/{paquimetroId}")
     public ResponseEntity<?> pagarPaquimetro(@PathVariable String paquimetroId, @RequestBody @Valid PaquimetroPagamentoRequest request) throws DocNotFoundException, JsonProcessingException, PagamentoInvalidoException {
         paquimetroService.pagar(paquimetroId, request);
-        return ResponseEntity.ok("Pagamento efetuado, em breve enviaremos o recibo no e-mail: " + request.getEmail());
+        return ResponseEntity.ok("Pagamento efetuado, em breve enviaremos o recibo no seu e-mail de cadastro");
     }
 
 }
