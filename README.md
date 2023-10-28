@@ -1,6 +1,8 @@
 # api-paquimetro
 Api de paquímetros. Tech challenge FIAP fase 3.
 
+![Untitled](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/44ae10b3-f65b-4b78-baa4-44500d0915ea)
+
 > Swagger url: http://localhost:8080/api-paquimetro/swagger-ui/index.html#/
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/5537c5c2-b33a-4a73-8146-7bf04f4a35ed)
 
