@@ -20,6 +20,10 @@ public class PaquimetroController {
     @Autowired
     private PaquimetroService paquimetroService;
 
+    @GetMapping(value = "/{cpf}")
+    public ResponseEntity<?> buscarAtivosPorCondutor(@PathVariable("cpf") String cpf) throws DocNotFoundException {
+        return ResponseEntity.ok(paquimetroService.buscarAtivosPorCondutor(cpf));
+    }
 
     @PostMapping(value = "/iniciar")
     public ResponseEntity<?> iniciarPaquimentro(@RequestBody @Valid PaquimetroRequest request) throws DocNotFoundException, JsonProcessingException {

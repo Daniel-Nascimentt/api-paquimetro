@@ -8,6 +8,7 @@ import br.com.fiap.paquimetro.dto.response.PaquimetroResponse;
 import br.com.fiap.paquimetro.exception.DocNotFoundException;
 import br.com.fiap.paquimetro.exception.PagamentoInvalidoException;
 import br.com.fiap.paquimetro.queue.RabbitMqProducer;
+import br.com.fiap.paquimetro.repository.CondutorRepository;
 import br.com.fiap.paquimetro.repository.PaquimetroRepository;
 import br.com.fiap.paquimetro.repository.VeiculoRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class PaquimetroService {
@@ -27,6 +30,9 @@ public class PaquimetroService {
 
     @Autowired
     private RabbitMqProducer rabbitMq;
+
+    @Autowired
+    private CondutorRepository condutorRepository;
 
     @Transactional
     public String iniciarPaquimetro(PaquimetroRequest request) throws DocNotFoundException, JsonProcessingException {
@@ -90,5 +96,12 @@ public class PaquimetroService {
     @Async
     public void emitirRecibo(Paquimetro paquimetro) throws JsonProcessingException {
         rabbitMq.sendEmitirRecibo(paquimetro);
+    }
+
+    public List<PaquimetroResponse> buscarAtivosPorCondutor(String cpf) throws DocNotFoundException {
+
+        Condutor condutor = condutorRepository.findByDocumentoIdentificacao(cpf).orElseThrow(() -> new DocNotFoundException("Condutor não encontrado!"));
+
+        return paquimetroRepository.findByCondutorAndStatus(condutor);
     }
 }
