@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class AlertaScheduled {
 
     // em milesegundos
-    private static final long DOIS_MINUTOS = 20000;
+    private static final long DOIS_MINUTOS = 120000;
 
     @Autowired
     private AlertaService alertaService;

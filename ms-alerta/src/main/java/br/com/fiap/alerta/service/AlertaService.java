@@ -49,7 +49,7 @@ public class AlertaService {
         return "ATENÇÃO!! \n"
                 .concat("\n")
                 .concat("Seu prazo de estacionamento está prestes a virar a hora.").concat("\n")
-                .concat("Se a modalidade de estacionamento escolhida for por horario fixo, evite dor de cabeça e posseis encargos por ultrapassar o horario marcado.").concat("\n")
+                .concat("Se a modalidade de estacionamento escolhida for por horario fixo, evite dor de cabeça e possiveis encargos por ultrapassar o horario marcado.").concat("\n")
                 .concat("\n")
                 .concat("Atenciosamente: Equipe FIAP de paquimetro.");
     }
