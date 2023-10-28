@@ -6,6 +6,7 @@
 * [Start](#start)
 * [Decisoes](#decisoes)
 * [Desenho da nova arquitetura](#desenhoNovaArquitetura)
+* [Exemplo Collection Mongo](#exemploCollectionMongo)
 * [Sobre API-paquimetro](#sobreApiPaquimetro)
 * [Sobre ms-email](#sobrems-email)
 * [Sobre ms-alerta](#sobrems-alerta)
@@ -125,6 +126,16 @@ server.error.include-stacktrace= never
 
 #
 
+# Exemplo Collection Mongo
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/a96d6cdb-d9b4-4dd2-ab2d-6d33a8f90eed)
+> OBS: CPF gerado no site 4Devs
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/03314626-90ef-4599-b774-d2ea0aba150d)
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/0d26d8cb-5d94-4d1b-b742-827bebed74e8)
+> OBS: O tempo de estacionamento está zerado porque é um exemplo
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/d7b691a9-1c49-4ffc-8ea2-74a2047ba6d1)
+![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/74dbd7c8-d2e6-4405-bbb6-943747b4b021)
+
+#
 # Sobre API-paquimetro
 
 A API-paquimetro é responsavel por iniciar e finalizar/pagar o estacionamento, enviar mensagens para demais micro serviços (via RabbitMq), bem como o *ms-alerta* para programar o alerta com base no inicio do estacionamento, o *ms-recibo* para gerar o recibo e enviar ao cliente. Também executar alguns relatórios úteis. Sempre que um paquimetro é iniciado, ele solicita a placa do veículo, a partir da placa do veículo é possivel identificar o condutor, facilitando a usabilidade do sistema para o condutor.
