@@ -18,7 +18,7 @@
 * [Postman Collection](#postmanCollection)
 
 # 
-# Tecnologias 👨🏻‍💻 <!-- #tecnologias -->
+# Tecnologias 👨🏻‍💻 
 
 * Arquitetura: Micro services
 * Dependencias
@@ -67,7 +67,7 @@ As filas criadas no RabbitMq são:
     * Contém a lógica para gerar o recibo e fazer o envio por e-mail para o usuário.
 
 # 
-# Decisoes ✍🏻 {#decisoes}
+# Decisoes ✍🏻 
 
 *Arquitetura de micro-service:*
 Como é um sistema que precisa ser escalável, separar algumas responsabilidades, utilizar menssageria para processamento assincrono nos permite ser mais performatico em certos casos. Como esse sistema dificilmente haverá concorrencia, justamente porque usuários diferentes não acessarão os mesmos recursos, foi criado 4 APIs spring boot para compor a nova arquitetura da empresa de paquimetros.
@@ -121,12 +121,12 @@ server.error.include-stacktrace= never
     }
 ```
 
-## Desenho da nova arquitetura: {#desenhoNovaArquitetura}
+## Desenho da nova arquitetura: 
 ![Untitled (1)](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/4de155ea-77e9-492e-9844-93d5e9b92051)
 
 #
 
-# Exemplo Collection Mongo {#exemploCollectionMongo}
+# Exemplo Collection Mongo 
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/a96d6cdb-d9b4-4dd2-ab2d-6d33a8f90eed)
 
 > OBS: CPF gerado no site 4Devs
@@ -142,19 +142,19 @@ server.error.include-stacktrace= never
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/74dbd7c8-d2e6-4405-bbb6-943747b4b021)
 
 #
-# Sobre API-paquimetro {#sobreApiPaquimetro}
+# Sobre API-paquimetro 
 
 A API-paquimetro é responsavel por iniciar e finalizar/pagar o estacionamento, enviar mensagens para demais micro serviços (via RabbitMq), bem como o *ms-alerta* para programar o alerta com base no inicio do estacionamento, o *ms-recibo* para gerar o recibo e enviar ao cliente. Também executar alguns relatórios úteis. Sempre que um paquimetro é iniciado, ele solicita a placa do veículo, a partir da placa do veículo é possivel identificar o condutor, facilitando a usabilidade do sistema para o condutor.
 
 #
 
-# Sobre ms-email {#sobrems-email}
+# Sobre ms-email 
 
 Como o próprio nome ja diz, sua unica responsabilidade é para o envio de e-mails, esse micro serviço possui um único endpoint com os atributos necessários para o envio de e-mail, e ele pode ser acionado pelos micro services *ms-alerta* e *ms-recibo*.
 
 #
 
-# Sobre ms-alerta {#sobrems-alerta}
+# Sobre ms-alerta 
 
 Como o próprio nome ja diz, sua unica responsabilidade é para gerenciar alertas para os usuários com relação ao periodo estacionado. O ms-alerta tem a inteligencia para criar e cancelar os alertas baseado em notificações/mensagens recebidas via RabbitMq. E possui um Schedule que executa a cada 2 minutos para verificar os próximos alertas a serem enviados, acionando via OpenFeign/REST o *ms-email* para notificação do usuário.
 
@@ -165,7 +165,7 @@ Como o próprio nome ja diz, sua unica responsabilidade é para gerenciar alerta
 
 #
 
-# Sobre ms-recibo {#sobrems-recibo}
+# Sobre ms-recibo 
 
 Como o próprio nome ja diz, sua unica responsabilidade é para o gerenciamento dos recibos após o pagamento. Com isso é construido um recibo com base nos dados do estacionamento, como período, valor, tipo do estacionamento, etc. E faz o envio do recibo via e-mail pelo *ms-email*.
 
@@ -174,31 +174,31 @@ Como o próprio nome ja diz, sua unica responsabilidade é para o gerenciamento 
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/efc720d1-1991-4c85-b83c-c60da7d621ad)
 #
 
-# Swagger api-paquimetro {#swaggerApi-paquimetro}
+# Swagger api-paquimetro 
 
 > Swagger url: http://localhost:8080/api-paquimetro/swagger-ui/index.html#/
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/0b6f658b-e9ed-4aed-a2f4-dacca6af84b7)
 #
 
-# Swagger ms-email {#swaggerms-email}
+# Swagger ms-email 
 > Swagger url: http://localhost:8081/ms-email/swagger-ui/index.html#/
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/50ee6702-1076-496e-a3f9-cf3d3b339840)
 #
 
-# Swagger ms-recibo {#swaggerms-recibo}
+# Swagger ms-recibo 
 > Swagger url: http://localhost:8082/swagger-ui/index.html#/
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/d92398f2-a064-4adf-998e-517174e39e15)
 
 #
 
-# Swagger ms-alerta {#swaggerms-alerta}
+# Swagger ms-alerta 
 
 > Swagger url: http://localhost:8083/swagger-ui/index.html#/
 ![image](https://github.com/Daniel-Nascimentt/api-paquimetro/assets/65513073/5960fdc2-255e-43bb-b2e2-e480dd77f782)
 
 #
 
-# Postman Collection {#postmanCollection}
+# Postman Collection 
 #### OBS: Nos endpoints de iniciar, finalizar e pagar, atente-se que na URL é solicitado o id do paquimetro. Ao iniciar o paquimetro, ele é retornado no endpoint.
 [api-paquimetro.postman_collection.json](https://github.com/Daniel-Nascimentt/api-paquimetro/files/13196821/api-paquimetro.postman_collection.json)
 {
