@@ -18,7 +18,7 @@
 * [Postman Collection](#postmanCollection)
 
 # 
-# Tecnologias 👨🏻‍💻 <!-- tecnologias -->
+# Tecnologias 👨🏻‍💻 <!-- #tecnologias -->
 
 * Arquitetura: Micro services
 * Dependencias
@@ -41,7 +41,7 @@
 
 #
 
-# Start 👨🏻‍🔧 {#start}
+# Start 👨🏻‍🔧 <!-- #start -->
 
 Nesse documento não possui o swagger, endpoints e payloads de request e response. Mais abaixo você encontra-ra um print com os principais endpoints mais para ilustração, caso queria ver no detalhe, basta fazer o download do projeto e executar seus respectivos swaggers.
 
